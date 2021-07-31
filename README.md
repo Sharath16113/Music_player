@@ -5,7 +5,6 @@ Sense Music Player
 
 ###### Current version: 1.0
 
-Official Website: http://sensemusic.in
 
 The goal of this project is to implement an simple audio media app that works
 across multiple form factors and provide a consistent user experience
@@ -72,7 +71,7 @@ This app uses the Gradle build system. To build this project, use the
 
 Support
 -------
-email at support@sensemusic.in
+email at sharathsharu16113@gmail.com
 
 If you've found an error in this app, please
 [file an issue](https://github.com/Sharath16113/Music_player/issues)
