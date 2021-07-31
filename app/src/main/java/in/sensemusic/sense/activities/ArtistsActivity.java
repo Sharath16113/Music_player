@@ -419,7 +419,7 @@ public class ArtistsActivity extends AppCompatActivity implements SongsAdapter.S
 
     public void openGitPage(@NonNull final View v) {
         try {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Sharath16113")));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Sharath16113/Music_player")));
         } catch (ActivityNotFoundException e) {
             Toast.makeText(this, getString(R.string.Sharath16113), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
