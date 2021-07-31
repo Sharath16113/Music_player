@@ -75,7 +75,7 @@ Support
 email at support@sensemusic.in
 
 If you've found an error in this app, please
-[file an issue](https://github.com/SenseMusic/Sense/issues)
+[file an issue](https://github.com/Sharath16113/Music_player/issues)
 
 Patches are encouraged, and may be submitted by forking this project and
 submitting a pull request through GitHub. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for more
