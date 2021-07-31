@@ -1,0 +1,52 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.0'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+// rootProjecct variables (Frequently changing values)
+ext {
+    // Application name
+    appName = 'Sense'
+    applicationId = 'in.sensemusic.sense'
+
+    // Sdk and tools version info
+    compileSdkVersion = 29
+    //buildToolsVersion = '29.0.2' //Android Studio now determines this dynamically and uses the latest installed build tool
+    minSdkVersion = 21
+    targetSdkVersion = 29
+
+    /* Application version info
+    NOTE:- versionCode — A positive integer used as an internal version number. This number is used only
+    to determine whether one version is more recent than another, with higher numbers indicating more
+    recent versions. This is not the version number shown to users; that number is set by the versionName
+    setting, below. The Android system uses the versionCode value to protect against downgrades by preventing
+    users from installing an APK with a lower versionCode than the version currently installed on their device */
+    versionCode = 1             // must increment with every new release
+    versionName = '1.0'         // change with every release
+
+    // Custom Application dependencies version info
+    glideVersion = '4.9.0'
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

@@ -1,0 +1,152 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    //buildToolsVersion rootProject.buildToolsVersion
+
+    /* Flavor dimensions
+    NOTE:- Specifies the flavor dimensions you want to use. The order in which you
+    list each dimension determines its priority, from highest to lowest,
+    when Gradle merges variant sources and configurations. You must assign
+    each product flavor you configure to one of the flavor dimensions. */
+    flavorDimensions "version"
+
+    defaultConfig {
+
+        /* Application name
+        NOTE:- It must neither be present in /res/values/strings.xml
+        nor in /res/values/string_no_translate.xml i.e translations xmls
+        This string resource value will be generated on every compilation. */
+        resValue 'string', 'app_name', rootProject.appName
+        resValue 'string', 'app_version', rootProject.versionName
+
+        applicationId "$rootProject.applicationId"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName "$rootProject.versionName"
+
+        vectorDrawables.useSupportLibrary = true
+
+        // Change default apk file name
+        setProperty("archivesBaseName", "$rootProject.appName-$rootProject.versionName")
+
+        compileOptions {
+            // Using Java Version 8
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+    }
+
+    signingConfigs {
+        release {
+            // DO NOT edit/update these below entries here
+            // edit/update these entries present in the file signing.properties in the root folder
+
+            //storeFile file('C:\\Users\\singh\\OneDrive\\Work\\Signing Keys\\sense-upload-keystore.jks')
+            //storePassword 'admin@sense'
+            //keyAlias = 'upload'
+            //keyPassword 'admin@sense'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+    buildTypes {
+        debug {
+            versionNameSuffix "-debug"
+            applicationIdSuffix '.debug'
+
+            shrinkResources false
+            minifyEnabled false
+
+            debuggable true
+            jniDebuggable true
+            renderscriptDebuggable true
+            pseudoLocalesEnabled true
+            zipAlignEnabled false
+        }
+
+        release {
+            shrinkResources true
+            minifyEnabled true
+
+            debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
+            pseudoLocalesEnabled false
+            zipAlignEnabled true
+
+            // release build key signing
+            signingConfig signingConfigs.release
+        }
+    }
+	productFlavors {
+        //Examples:- free/demo & paid/pro versions or playstore & othermarket version
+        /*playstore {
+            dimension "version"
+        }
+        fdroid {
+            dimension "version"
+
+            applicationIdSuffix '.fdroid'
+        }*/
+    }
+
+    lintOptions {
+        disable 'MissingTranslation'
+        disable 'ExtraTranslation'
+
+        //enable 'ObsoleteSdkInt'
+
+        abortOnError true
+    }
+}
+
+dependencies {
+
+    // Support Libs
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.legacy:legacy-support-core-utils:1.0.0'
+    implementation 'androidx.media:media:1.0.1'
+    api 'com.google.android.material:material:1.1.0-alpha09'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
+    //if using java 8,ignore above line and add the following line
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.0.0"
+
+    // Constraint Layout
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
+    
+    // Glide dependencies
+    implementation("com.github.bumptech.glide:glide:$rootProject.glideVersion@aar") {
+        transitive = true
+        //exclude group: "com.android.support" //exclude support libs if problem exits
+    }
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
+}
+
+// Release build key signing (Manually i.e. entries present in the file signing.properties in the root folder)
+Properties props = new Properties()
+def propFile = new File('signing.properties')
+if (propFile.canRead()) {
+    props.load(new FileInputStream(propFile))
+
+    if (props != null && props.containsKey('STORE_FILE') && props.containsKey('KEY_ALIAS')
+            && props.containsKey('STORE_PASSWORD') && props.containsKey('KEY_PASSWORD')) {
+        android.signingConfigs.release.storeFile = file(props['STORE_FILE'])
+        android.signingConfigs.release.storePassword = props['STORE_PASSWORD']
+        android.signingConfigs.release.keyAlias = props['KEY_ALIAS']
+        android.signingConfigs.release.keyPassword = props['KEY_PASSWORD']
+    } else {
+        println 'signing.properties found but some entries are missing'
+        android.buildTypes.release.signingConfig = null
+    }
+} else {
+    println 'signing.properties not found'
+    android.buildTypes.release.signingConfig = null
+}
