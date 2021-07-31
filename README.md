@@ -1,7 +1,7 @@
 Sense Music Player 
 ===========================
 ###### Very simple, slim, nice music player
-[![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21) [![Donate on PayPal](https://img.shields.io/badge/PayPal-Donate%20Now-brightgreen.svg)](https://paypal.me/prashant06)
+[![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21)
 
 ###### Current version: 1.0
 
